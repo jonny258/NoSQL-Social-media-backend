@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 const validate = require("mongoose-validator");
 
 //I need to format the date before it gets to the data base

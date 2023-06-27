@@ -38,7 +38,8 @@ const updateUser = async (req, res) => {
     };
     const updateUser = await User.findOneAndUpdate(
       { _id: userId },
-      updatedFields
+      updatedFields,
+      { new: true }
     );
     res.json(updateUser);
   } catch (err) {
@@ -88,11 +89,11 @@ const deleteUserFriend = async (req, res) => {
     const friendId = req.params.friendId;
 
     const selcetedUser = await User.findById(userId);
-    const requestedFriend = await User.findById(friendId);
-    if (!requestedFriend || !selcetedUser) {
-      res.json("Either your selected user or requested friend does not exist");
+    //const requestedFriend = await User.findById(friendId);
+    if (!selcetedUser) {
+      return res.json("Either your selected user or requested friend does not exist");
     } else if (!selcetedUser.friends.includes(friendId)) {
-      res.json("You don't have this friend added");
+      return res.json("You don't have this friend added");
     } else {
       const updatedUser = await User.findByIdAndUpdate(
         userId,
