@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 const {
+  //Imports all the different functions from the controller
   getUsers,
   getSingleUser,
   createUser,
@@ -10,6 +11,7 @@ const {
   deleteUserFriend,
 } = require("../../controllers/usersControllers");
 
+//These say what functions should be ran on what method to what route
 router.route("/").get(getUsers).post(createUser);
 
 router.route("/:userId").get(getSingleUser).put(updateUser).delete(deleteUser);
